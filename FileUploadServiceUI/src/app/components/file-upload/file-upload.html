@@ -1,0 +1,98 @@
+<div class="container mt-3 file-upload-service">
+  <h1>File Upload service</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">File Upload</h5>
+            
+            <div id="recordtype" class="mb-3 mt-3">
+                <label for="recordtype" class="form-label">Choose the correct Record Type for the file you are uploading</label>
+                <select class="form-select form-select-md" aria-label=".form-select-md example" [(ngModel)]="recordTypeId" (change)="onRecordTypeChanged(recordTypeId)">
+                    <option selected value="0">Select Record Type</option>
+                    <option value="1">Portfolio Companies</option>
+                    <option value="2">Transactions</option>
+                    <option value="3">Investors</option>
+                </select>    
+            </div>
+                    
+            
+            <div class="mb-3 mt-3 file-upload-control">                
+                <input class="form-control" type="file" id="formFile" #fileInput>
+                <label for="formFile" class="form-label mb-0">Max file size is 5MB</label> <br/>
+                <label for="formFile" class="form-label">Allowed file types are: jpg, png, pdf, docx, doc, xlsx</label>
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="onFileUpload(fileInput)">Upload File</button>
+            <button type="button" class="btn btn-danger ml-12" (click)="resetFormControls()">Reset</button>
+
+            @if(showScuccessAlert)
+            {
+                <div class="alert alert-success mt-12" role="alert">
+                    {{ successMessage }}
+                </div>
+            }
+            
+            @if(showErrorAlert)
+            {
+                <div class="alert alert-danger mt-12" role="alert">
+                    {{ errorMessage }}
+                </div>
+            }
+            
+        </div>
+    </div>
+
+    @if(uploadedFiles.length > 0){
+        <div class="card uploaded-files-table">
+            <div class="card-body">
+                <h5 class="card-title">Uploaded Files</h5>
+
+                <div id="recordtype-filter" class="mb-3 mt-3">
+                    <label for="recordtype-filter" class="form-label">Select a Record Type to filter the data</label>
+                    <select class="form-select form-select-md" aria-label=".form-select-md example" [(ngModel)]="recordTypeIdFilter" (change)="onRecordTypeFilterChanged(recordTypeIdFilter)">
+                        <option selected value="0">All</option>
+                        <option value="1">Portfolio Companies</option>
+                        <option value="2">Transactions</option>
+                        <option value="3">Investors</option>
+                    </select>    
+                </div>
+
+                @if(filteredFiles.length == 0){
+                    <p>No files to display for the selected Record Type</p>
+                }
+                @else {
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <colgroup>
+                            <col class="recordtype-col">
+                            <col class="filename-col">
+                            <col class="uploadedby-col">
+                            <col class="uploadedon-col">
+                            <col class="filepath-col">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>Record Type</th>
+                                <th>File Name</th>
+                                <th>Uploaded By</th>
+                                <th>Uploaded On</th>
+                                <th>File Path</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @for(file of filteredFiles; track file.id) {
+                                    <tr>
+                                        <td>{{ file.recordTypeName }}</td>
+                                        <td class="shortened-name">{{ file.fileName }}</td>
+                                        <td>{{ file.uploadedBy }}</td>
+                                        <td>{{ file.uploadedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+                                        <td class="shortened-name">{{ file.uploadedFilePath }}</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

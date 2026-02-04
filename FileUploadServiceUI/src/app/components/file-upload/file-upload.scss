@@ -1,0 +1,71 @@
+.file-upload-service{
+    // font-family: Arial, sans-serif;
+    max-width: 900px;
+
+    #recordtype {
+        max-width: 600px;
+        label {
+            padding-left:5px;
+            font-weight: 500;
+        }
+    }
+
+    .file-upload-control{
+        label{
+            padding-left:5px; 
+            font-size: 12px; 
+            font-weight:500; 
+            color: red;
+        }
+
+        .mb-0{
+            margin-bottom: 0px;
+        }
+    }
+
+    .mt-12{
+        margin-top: 12px;
+    }
+
+    .ml-12{
+        margin-left: 12px;
+    }
+
+    .uploaded-files-table{
+        margin-top: 20px; 
+        margin-bottom: 20px;
+
+        #recordtype-filter{
+            max-width: 600px;
+            label {
+                padding-left:5px;
+                font-weight: 500;
+            }
+        }
+
+        .table-responsive{
+            table{
+                table-layout: fixed; 
+                width: 100%;
+
+                .recordtype-col{
+                    width: 160px;
+                }
+                .filename-col{
+                    width: 200px;
+                }
+                .uploadedby-col{
+                    width: 120px;
+                }
+                .uploadedon-col{
+                    width: 150px;
+                }
+
+                .shortened-name{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;}
+            }
+        }
+    }
+}
