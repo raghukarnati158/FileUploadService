@@ -11,7 +11,8 @@ builder.Services.AddCors(options =>
                       builder =>
                       {
                           builder
-                            .WithOrigins("http://localhost:4200") // specifying the allowed origin
+                            //.WithOrigins("http://localhost:4200") // specifying the allowed origin
+                            .AllowAnyOrigin() // allowing any origin to access the API
                             .AllowAnyMethod() // defining the allowed HTTP method
                             .AllowAnyHeader(); // allowing any header to be sent
                       });
