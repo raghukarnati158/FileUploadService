@@ -16,6 +16,10 @@ namespace FileUploadServiceAPI.Repositories
             {
                 string fileNameGuid = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 string uploadFilePath = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
+                if (!Directory.Exists(uploadFilePath))
+                {
+                    Directory.CreateDirectory(uploadFilePath);
+                }
                 using FileStream fileStream = new FileStream(Path.Combine(uploadFilePath, fileNameGuid), FileMode.Create);
                 await file.CopyToAsync(fileStream);
                 AddFileToInMemoryList(file, fileNameGuid, uploadFilePath, recordTypeId);
